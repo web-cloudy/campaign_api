@@ -17,16 +17,16 @@ import {
   ApiResponse,
   ApiTags,
 } from "@nestjs/swagger";
-import { Request } from "express";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
+import RequestWithUser from "src/auth/interface/requestWithUser";
 import FindOneParams from "src/utils/findOneParams";
 import ApisService from "./apis.service";
 
 @ApiBearerAuth()
-@ApiTags("MOBILE:Rewards")
-@Controller("reward_api")
+@ApiTags("Fans")
+@Controller("fan")
 @UseInterceptors(ClassSerializerInterceptor)
-export class RewardsController {
+export class FansController {
   constructor(private readonly apisService: ApisService) {}
 
   @Get(":id")
@@ -35,7 +35,17 @@ export class RewardsController {
     status: 200,
     description: "The found record",
   })
-  getRewardById(@Param() { id }: FindOneParams, @Req() req: any) {
-    return this.apisService.getRewardsById(Number(id));
+  getUsers(@Req() req: RequestWithUser) {
+    return this.apisService.getUsers(req.user);
+  }
+
+  @Get("event/:id")
+  @UseGuards(JwtAuthGuard)
+  @ApiResponse({
+    status: 200,
+    description: "The found record",
+  })
+  getUsersByEventId(@Param() { id }: FindOneParams) {
+    return this.apisService.getUsersByEventId(Number(id));
   }
 }

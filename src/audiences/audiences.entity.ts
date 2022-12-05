@@ -2,27 +2,27 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger";
-import User from "src/users/user.entity";
 import Event from "src/events/event.entity";
+import User from "src/users/user.entity";
 
-@Entity()
-class Attend {
+@Entity("audience")
+class Audience {
   @PrimaryGeneratedColumn()
   public id: number;
 
   @ApiProperty()
   @Column()
-  public user_id: number;
-
-  @ApiProperty()
-  @Column()
-  public event_id: number;
+  public name: string;
 
   @ApiProperty()
   @CreateDateColumn({
@@ -39,11 +39,15 @@ class Attend {
   })
   updatedAt: Date;
 
-  // @ManyToOne(() => Event, (event) => event.attends)
+  // @OneToOne(() => Event, {
+  //   eager: true,
+  //   cascade: true,
+  // })
+  // @JoinColumn()
   // public event: Event;
 
-  // @ManyToOne(() => User, (user) => user.attends)
-  // public user: User;
+  @OneToMany(() => User, (user) => user.audience)
+  public users: User[];
 }
 
-export default Attend;
+export default Audience;
