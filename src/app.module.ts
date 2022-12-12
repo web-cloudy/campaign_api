@@ -27,9 +27,9 @@ import { SendgridService } from "./sendgrid/sendgrid.service";
     TypeOrmModule.forRoot({
       type: "mysql",
       host: "localhost",
-      port: 3306,
-      username: "root",
-      password: "",
+      port: 5432,
+      username: "zoomin",
+      password: "zoomin",
       database: "zoom",
       entities: [User, Address, Event, Game, Reward, Attend, Audience],
       synchronize: true,
