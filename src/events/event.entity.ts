@@ -66,7 +66,7 @@ class Event {
   @Column()
   public event_coins: number;
 
-  @ApiProperty({ default: 5 })
+  @ApiProperty({default: 5})
   @Column()
   public duration: number;
 
