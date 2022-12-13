@@ -25,7 +25,7 @@ import { SendgridService } from "./sendgrid/sendgrid.service";
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: "mysql",
+      type: "postgres",
       host: "localhost",
       port: 5432,
       username: "zoomin",
@@ -33,22 +33,22 @@ import { SendgridService } from "./sendgrid/sendgrid.service";
       database: "zoomin",
       entities: [User, Address, Event, Game, Reward, Attend, Audience],
       synchronize: true,
-      // ssl: {
-      //   require: true,
-      //   rejectUnauthorized: false,
-      // },
-      // // Run migrations automatically,
-      // // you can disable this if you prefer running migration manually.
-      // migrationsRun: false,
-      // logging: false,
-      // logger: "file",
+       ssl: {
+         require: true,
+         rejectUnauthorized: false,
+       },
+       // Run migrations automatically,
+       // you can disable this if you prefer running migration manually.
+       migrationsRun: false,
+       logging: false,
+       logger: "file",
 
-      // migrations: [__dirname + "/migrations/**/*{.ts,.js}"],
-      // cli: {
-      //   // Location of migration should be inside src folder
-      //   // to be compiled into dist/ folder.
-      //   migrationsDir: "src/migrations",
-      // },
+       migrations: [__dirname + "/migrations/**/*{.ts,.js}"],
+      cli: {
+         // Location of migration should be inside src folder
+         // to be compiled into dist/ folder.
+         migrationsDir: "src/migrations",
+       },
     }),
     AuthModule,
     AdminUsersModule,
