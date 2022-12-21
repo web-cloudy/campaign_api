@@ -62,9 +62,13 @@ class Event {
   @Column({ nullable: true, default: "" })
   public qr_code: string;
 
-  // @ApiProperty({ default: 10 })
-  // @Column()
-  // public event_coins: number;
+  @ApiProperty({ default: 10 })
+  @Column()
+  public event_coins: number;
+
+  @ApiProperty({ default: 10 })
+  @Column()
+  public subscribe: number;
 
   @ApiProperty({default: 5})
   @Column()
