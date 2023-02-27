@@ -170,11 +170,6 @@ export default class ApisService {
     // return event;
   }
 
-  async getAllRewards() {
-    const rewards = await this.rewardsRepository.find();
-    return rewards;
-  }
-
   async getRewardsById(id: number) {
     const reward = await this.rewardsRepository.findOne(id);
     // const event = await this.eventsRepository
