@@ -217,6 +217,12 @@ export default class ApisService {
     };
   }
 
+  async createAttend(attend) {
+    const newAttend = await this.attendsRepository.create(attend);
+    await this.attendsRepository.save(newAttend);
+    return newAttend;
+  }
+
   async getUsers() {
     const events = await this.eventsRepository.find();
     const eventIds = events.map((e) => e.id);
